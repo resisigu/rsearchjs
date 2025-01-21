@@ -21,7 +21,7 @@ function createSearchWindow() {
         </button>
       </div>
       <div id="bookmark-list" style="display: none;">
-        <h3>ブックマーク</h3>
+        <h3>ブックマーク <span id="add-bookmark">➕</span></h3>
         <ul id="bookmarks"></ul>
         <button id="clear-bookmarks">全て削除</button>
       </div>
@@ -57,7 +57,7 @@ function createSearchWindow() {
       align-items: center;
       margin-bottom: 20px;
     }
-    #search-box h2 {
+    #search-box h2, #search-box h3 {
       margin: 0;
       color: #4285F4;
       font-size: 24px;
@@ -128,6 +128,10 @@ function createSearchWindow() {
     #footer a:hover {
       text-decoration: underline;
     }
+    #add-bookmark {
+      cursor: pointer;
+      margin-left: 10px;
+    }
   `;
   
   document.head.appendChild(style);
@@ -142,6 +146,7 @@ function createSearchWindow() {
   });
   document.getElementById('bookmark-button').addEventListener('click', toggleBookmarkList);
   document.getElementById('clear-bookmarks').addEventListener('click', clearAllBookmarks);
+  document.getElementById('add-bookmark').addEventListener('click', addNewBookmark);
   
   loadBookmarks();
 }
@@ -191,6 +196,14 @@ function loadBookmarks() {
     `;
     bookmarksList.appendChild(li);
   });
+}
+
+function addNewBookmark() {
+  const name = prompt('ブックマーク名を入力してください:');
+  const url = prompt('URLを入力してください:');
+  if (name && url) {
+    addBookmark(name, url);
+  }
 }
 
 function addBookmark(name, url) {
