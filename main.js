@@ -34,6 +34,8 @@ function createSearchWindow() {
   
   const style = document.createElement('style');
   style.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap');
+    
     #search-container {
       position: fixed;
       top: 50%;
@@ -41,6 +43,7 @@ function createSearchWindow() {
       transform: translate(-50%, -50%);
       z-index: 9999;
       width: 600px;
+      font-family: 'Nunito', sans-serif;
     }
     #search-box {
       background-color: white;
@@ -57,8 +60,8 @@ function createSearchWindow() {
     #search-box h2 {
       margin: 0;
       color: #4285F4;
-      font-family: Arial, sans-serif;
       font-size: 24px;
+      font-weight: 700;
     }
     #close-button {
       background: none;
@@ -81,6 +84,7 @@ function createSearchWindow() {
       font-size: 16px;
       padding: 10px 0;
       background-color: transparent;
+      font-family: 'Nunito', sans-serif;
     }
     #search-button, #bookmark-button {
       background: none;
@@ -110,6 +114,7 @@ function createSearchWindow() {
     }
     #clear-bookmarks {
       margin-top: 10px;
+      font-family: 'Nunito', sans-serif;
     }
     #footer {
       margin-top: 20px;
