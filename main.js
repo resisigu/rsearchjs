@@ -169,16 +169,22 @@ function openSpecialPage(url) {
   const name = url.replace('rs://', '');
   const specialPageUrl = `https://rssg.me/page/${name}.html`;
   
-  fetch(specialPageUrl)
-    .then(response => response.text())
+  fetch(specialPageUrl, { mode: 'cors' })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('ページが見つかりません');
+      }
+      return response.text();
+    })
     .then(html => {
       const specialPageWindow = window.open('', '_blank');
       specialPageWindow.document.write(html);
       specialPageWindow.document.close();
-      specialPageWindow.location.href = `rs://${name}`;
+      specialPageWindow.location.href = url;
     })
     .catch(error => {
       console.error('Error loading special page:', error);
+      alert(`特殊ページの読み込みに失敗しました: ${error.message}`);
     });
 }
 
