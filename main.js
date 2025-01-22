@@ -154,13 +154,32 @@ function createSearchWindow() {
 function performSearch() {
   const input = document.getElementById('search-input').value;
   if (input) {
-    if (isValidURL(input)) {
+    if (input.startsWith('rs://')) {
+      openSpecialPage(input);
+    } else if (isValidURL(input)) {
       window.open(input, '_blank');
     } else {
       const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(input)}`;
       window.open(searchUrl, '_blank');
     }
   }
+}
+
+function openSpecialPage(url) {
+  const name = url.replace('rs://', '');
+  const specialPageUrl = `https://rssg.me/page/${name}.html`;
+  
+  fetch(specialPageUrl)
+    .then(response => response.text())
+    .then(html => {
+      const specialPageWindow = window.open('', '_blank');
+      specialPageWindow.document.write(html);
+      specialPageWindow.document.close();
+      specialPageWindow.location.href = `rs://${name}`;
+    })
+    .catch(error => {
+      console.error('Error loading special page:', error);
+    });
 }
 
 function closeSearchWindow() {
